@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { BurgerMenu } from '@/components/ui/burger-menu';
+import Link from 'next/link';
 
 interface HeroProps {
   className?: string;
@@ -50,9 +51,9 @@ export const Hero = ({ className }: HeroProps) => {
       <div className="relative h-full max-w-[1920px] mx-auto px-6 md:px-12 flex flex-col">
         <div className="py-4">
           <div className="flex items-center justify-between">
-            <a href="/" className="text-[24px] sm:text-[28px] md:text-[32px] leading-none tracking-[0] uppercase font-medium">
+            <Link href="/" className="text-[24px] sm:text-[28px] md:text-[32px] leading-none tracking-[0] uppercase font-medium">
               Логотип
-            </a>
+            </Link>
 
             <nav className="hidden lg:flex items-center gap-4 xl:gap-8">
               <a

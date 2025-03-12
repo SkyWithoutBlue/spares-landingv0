@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
 interface FooterProps {
@@ -23,12 +24,9 @@ export const Footer = ({ className }: FooterProps) => {
       <div className="max-w-[1920px] mx-auto px-6 md:px-12 py-8">
         <div className="flex flex-col md:flex-row justify-between items-center md:items-start">
           <div className="mb-4 md:mb-0">
-            <a
-              href="/"
-              className="text-[32px] leading-none tracking-[0] uppercase font-medium"
-            >
+            <Link href="/" className="text-[32px] leading-none tracking-[0] uppercase font-medium">
               Логотип
-            </a>
+            </Link>
             <p className="mt-4 text-base">ALL RIGHT RESERVED, 2025</p>
           </div>
 
