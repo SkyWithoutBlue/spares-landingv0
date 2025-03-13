@@ -1,11 +1,13 @@
+'use client';
+
+import { useEffect } from 'react';
 import type { Metadata } from "next";
-import { Roboto_Condensed } from 'next/font/google';
+import { Inter, Roboto_Condensed } from 'next/font/google';
 import "./globals.css";
 
+const inter = Inter({ subsets: ['latin', 'cyrillic'] });
 const robotoCondensed = Roboto_Condensed({
   subsets: ['latin', 'cyrillic'],
-  weight: ['300', '400', '700'],
-  display: 'swap',
   variable: '--font-roboto-condensed',
 });
 
@@ -19,8 +21,15 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  useEffect(() => {
+    // Сброс позиции скролла при загрузке страницы
+    if (typeof window !== 'undefined') {
+      window.scrollTo(0, 0);
+    }
+  }, []);
+
   return (
-    <html lang="ru" className={`${robotoCondensed.variable} font-roboto-condensed antialiased`}>
+    <html lang="ru" className={`${inter.className} ${robotoCondensed.variable}`}>
       <body>{children}</body>
     </html>
   );

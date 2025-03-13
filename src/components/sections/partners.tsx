@@ -4,6 +4,8 @@ import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import { cn } from '@/lib/utils';
+import { motion } from 'framer-motion';
+import { fadeInLeft, fadeInScale } from '@/lib/constants/animations';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -31,18 +33,28 @@ export const Partners = ({ className }: PartnersProps) => {
       <div className="max-w-[1920px] mx-auto px-6 md:px-12 py-20">
         <div className="flex flex-col lg:flex-row gap-12 items-center">
           {/* Заголовок и описание */}
-          <div className="w-full lg:w-1/2">
-            <h2 className="text-[40px] md:text-[60px] leading-normal md:leading-[32px] uppercase font-bold mb-8 md:mb-12 font-roboto-condensed">
+          <motion.div {...fadeInLeft} className="w-full lg:w-1/2">
+            <motion.h2
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+              className="text-[40px] md:text-[60px] leading-normal md:leading-[32px] uppercase font-bold mb-8 md:mb-12 font-roboto-condensed"
+            >
               ПАРТНЕРЫ
-            </h2>
-            <p className="text-3xl leading-[140%] font-roboto-condensed uppercase">
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+              className="text-3xl leading-[140%] font-roboto-condensed uppercase"
+            >
               МЫ ОСУЩЕСТВЛЯЕМ ПОСТАВКИ ВЕДУЩИМ МИРОВЫМ ПРОИЗВОДИТЕЛЯМ ШИН,
               ИХ ПОДРЯДЧИКАМ И ПРОИЗВОДСТВЕННЫМ КОМПАНИЯМ.
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
           {/* Слайдер */}
-          <div className="w-full lg:w-1/2">
+          <motion.div {...fadeInScale} className="w-full lg:w-1/2">
             <Swiper
               modules={[Pagination, Autoplay]}
               spaceBetween={30}
@@ -65,20 +77,26 @@ export const Partners = ({ className }: PartnersProps) => {
             >
               {partners.map((partner) => (
                 <SwiperSlide key={partner.id}>
-                  <div className="aspect-[3/2] relative bg-white p-4 flex items-center justify-center">
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
+                    className="aspect-[3/2] relative bg-white p-4 flex items-center justify-center"
+                  >
                     <Image
                       src={partner.logo}
                       alt={partner.name}
                       fill
                       className="object-contain"
                       sizes="(max-width: 768px) 50vw, 25vw"
+                      quality={85}
+                      loading="lazy"
                     />
-                  </div>
+                  </motion.div>
                 </SwiperSlide>
               ))}
             </Swiper>
             <div className="swiper-pagination !relative mt-8"></div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

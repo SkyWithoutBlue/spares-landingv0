@@ -3,6 +3,8 @@
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { fadeInLeft, fadeInUp, staggerContainer, staggerItem } from '@/lib/constants/animations';
 
 interface ProductsProps {
   className?: string;
@@ -38,6 +40,11 @@ const products = [
   },
 ];
 
+const productVariants = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: { opacity: 1, scale: 1 }
+};
+
 export const Products = ({ className }: ProductsProps) => {
   const [activeCategory, setActiveCategory] = useState<Category>('ВСЕ');
 
@@ -47,15 +54,23 @@ export const Products = ({ className }: ProductsProps) => {
 
   return (
     <section id="products" className={cn('w-full bg-white text-black px-6', className)}>
-      <h2 className="text-[40px] md:text-[60px] leading-normal md:leading-[32px] uppercase font-bold mb-8 md:mb-12">
+      <motion.h2 {...fadeInLeft} className="text-[40px] md:text-[60px] leading-normal md:leading-[32px] uppercase font-bold mb-8 md:mb-12">
         ПРОДУКЦИЯ
-      </h2>
+      </motion.h2>
 
       {/* Categories */}
-      <div className="flex flex-wrap gap-4 mt-[40px] mb-[50px]">
+      <motion.div
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="flex flex-wrap gap-4 mt-[40px] mb-[50px]"
+      >
         {categories.map((category) => (
-          <button
+          <motion.button
             key={category}
+            variants={staggerItem}
+            transition={{ duration: 0.5 }}
             onClick={() => setActiveCategory(category)}
             className={cn(
               'text-3xl uppercase',
@@ -66,35 +81,49 @@ export const Products = ({ className }: ProductsProps) => {
           >
             {category}
             {category !== 'ВСЕ' && ' |'}
-          </button>
+          </motion.button>
         ))}
-      </div>
+      </motion.div>
 
       {/* Description */}
-      <p className="text-3xl uppercase mb-[54px]">
+      <motion.p {...fadeInUp} className="text-3xl uppercase mb-[54px]">
         ИЗГОТАВЛИВАЕМ ШИПЫ И МИНИВЕНТИЛИ ПО ЧЕРТЕЖАМ ЗАКАЗЧИКА. ВОЗМОЖНО ИЗГОТОВЛЕНИЕ
         КАК ИЗ ОБЫЧНОЙ СТАЛИ, ТАК И ИЗ НЕРЖАВЕЮЩЕЙ СТАЛИ. ВОЗМОЖНО ТОЧЕНИЕ ВНУТРЕННЕЙ
         И НАРУЖНОЙ РЕЗЬБЫ. ПОВЕРХНОСТНАЯ ОБРАБОТКА ПО ЗАПРОСУ.
-      </p>
+      </motion.p>
 
       {/* Products Grid */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <motion.div
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+      >
         {filteredProducts.map((product) => (
-          <div key={product.id} className="group cursor-pointer">
+          <motion.div
+            key={product.id}
+            variants={productVariants}
+            transition={{ duration: 0.5 }}
+            className="group cursor-pointer"
+          >
             <div className="relative aspect-square mb-4 overflow-hidden bg-gray-100">
               <Image
                 src={product.image}
                 alt={product.title}
                 fill
                 className="object-cover transition-transform duration-300 group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                quality={85}
+                loading="lazy"
               />
             </div>
             <h3 className="text-3xl leading-[24px] uppercase font-medium">
               {product.title}
             </h3>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 };
