@@ -59,16 +59,16 @@ export const Contacts = ({ className }: ContactsProps) => {
 
               <div>
                 <h3 className="uppercase mb-4">НАПИСАТЬ В ТЕЛЕГРАМ ИЛИ WHATS APP</h3>
-                <div className="flex gap-4">
+                <div className="flex gap-4 flex-col md:flex-row">
                   <Link
                     href="#"
-                    className="lg:px-16 px-8 py-3 border-2 rounded-[7px] border-black uppercase hover:bg-black hover:text-white transition-colors"
+                    className="lg:px-16 px-8 py-3 border-2 rounded-[7px] border-black uppercase hover:bg-black hover:text-white transition-colors flex items-center justify-center"
                   >
                     TELEGRAM
                   </Link>
                   <Link
                     href="#"
-                    className="lg:px-16 px-8 py-3 border-2 border-black rounded-[7px] uppercase hover:bg-black hover:text-white transition-colors"
+                    className="lg:px-16 px-8 py-3 border-2 border-black rounded-[7px] uppercase hover:bg-black hover:text-white transition-colors flex justify-center items-center text-nowrap"
                   >
                     WHATS APP
                   </Link>

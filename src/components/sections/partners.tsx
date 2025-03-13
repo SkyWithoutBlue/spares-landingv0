@@ -32,7 +32,7 @@ export const Partners = ({ className }: PartnersProps) => {
         <div className="flex flex-col lg:flex-row gap-12 items-center">
           {/* Заголовок и описание */}
           <div className="w-full lg:w-1/2">
-            <h2 className="text-[60px] font-roboto-condensed uppercase mb-[40px]">
+            <h2 className="text-[40px] md:text-[60px] leading-normal md:leading-[32px] uppercase font-bold mb-8 md:mb-12 font-roboto-condensed">
               ПАРТНЕРЫ
             </h2>
             <p className="text-3xl leading-[140%] font-roboto-condensed uppercase">

@@ -46,8 +46,8 @@ export const Products = ({ className }: ProductsProps) => {
     : products.filter(product => product.category === activeCategory);
 
   return (
-    <section id="products" className={cn('w-full bg-white text-black px-[50px]', className)}>
-      <h2 className="text-[60px] leading-3xl uppercase font-bold mb-12">
+    <section id="products" className={cn('w-full bg-white text-black px-6', className)}>
+      <h2 className="text-[40px] md:text-[60px] leading-normal md:leading-[32px] uppercase font-bold mb-8 md:mb-12">
         ПРОДУКЦИЯ
       </h2>
 
