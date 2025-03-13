@@ -87,7 +87,7 @@ export const Hero = ({ className }: HeroProps) => {
               <a
                 href="#contact-form"
                 onClick={(e) => scrollToSection(e, 'contact-form')}
-                className="text-[20px] xl:text-[32px] leading-none tracking-[0] uppercase font-medium px-4 xl:px-6 py-2 border-2 border-white hover:bg-white hover:text-black transition-colors"
+                className="text-[20px] xl:text-[32px] leading-none tracking-[0] uppercase font-medium px-4 xl:px-6 py-2 border-2 border-white rounded-[4px] hover:bg-white hover:text-black transition-colors"
               >
                 Связаться
               </a>
@@ -139,7 +139,7 @@ export const Hero = ({ className }: HeroProps) => {
                 <a
                   href="#contact-form"
                   onClick={(e) => scrollToSection(e, 'contact-form')}
-                  className="text-[24px] sm:text-[32px] leading-none tracking-[0] uppercase font-medium px-6 py-2 border-2 border-white hover:bg-white hover:text-black transition-colors"
+                  className="text-[24px] sm:text-[32px] leading-none tracking-[0] uppercase font-medium px-6 py-2 border-2 border-white rounded-[4px] hover:bg-white hover:text-black transition-colors"
                 >
                   Связаться
                 </a>
@@ -149,13 +149,13 @@ export const Hero = ({ className }: HeroProps) => {
         </div>
 
         <div className="flex-grow flex flex-col justify-center">
-          <h1 className="text-[40px] md:text-[60px] lg:text-[80px] font-roboto-condensed uppercase max-w-[800px] leading-tight mb-8">
+          <h1 className="text-[40px] md:text-[60px] lg:text-[100px] font-roboto-condensed uppercase max-w-[1200px] leading-tight mb-8">
             ДЕТАЛИ ДЛЯ РЕМОНТА АВТОМОБИЛЕЙ ОПТОМ
           </h1>
           <a
             href="#products"
             onClick={(e) => scrollToSection(e, 'products')}
-            className="inline-flex px-8 py-4 border-2 border-white uppercase text-lg hover:bg-white hover:text-black transition-colors w-fit"
+            className="inline-flex px-[63px] py-[10px] border-[2px] border-white uppercase text-lg hover:bg-white hover:text-black transition-colors w-fit rounded-[4px] md:text-3xl lg:text-[40px]"
           >
             Узнать больше
           </a>

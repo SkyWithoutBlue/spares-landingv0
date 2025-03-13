@@ -47,7 +47,7 @@ export const Products = ({ className }: ProductsProps) => {
 
   return (
     <section id="products" className={cn('w-full bg-white text-black px-[50px]', className)}>
-      <h2 className="text-[60px] leading-[30px] uppercase font-bold mb-12">
+      <h2 className="text-[60px] leading-3xl uppercase font-bold mb-12">
         ПРОДУКЦИЯ
       </h2>
 
@@ -58,7 +58,7 @@ export const Products = ({ className }: ProductsProps) => {
             key={category}
             onClick={() => setActiveCategory(category)}
             className={cn(
-              'text-[30px] uppercase',
+              'text-3xl uppercase',
               activeCategory === category
                 ? 'text-black font-bold'
                 : 'text-gray-500 hover:text-gray-700'
@@ -71,7 +71,7 @@ export const Products = ({ className }: ProductsProps) => {
       </div>
 
       {/* Description */}
-      <p className="text-[30px] uppercase mb-[54px]">
+      <p className="text-3xl uppercase mb-[54px]">
         ИЗГОТАВЛИВАЕМ ШИПЫ И МИНИВЕНТИЛИ ПО ЧЕРТЕЖАМ ЗАКАЗЧИКА. ВОЗМОЖНО ИЗГОТОВЛЕНИЕ
         КАК ИЗ ОБЫЧНОЙ СТАЛИ, ТАК И ИЗ НЕРЖАВЕЮЩЕЙ СТАЛИ. ВОЗМОЖНО ТОЧЕНИЕ ВНУТРЕННЕЙ
         И НАРУЖНОЙ РЕЗЬБЫ. ПОВЕРХНОСТНАЯ ОБРАБОТКА ПО ЗАПРОСУ.
@@ -89,7 +89,7 @@ export const Products = ({ className }: ProductsProps) => {
                 className="object-cover transition-transform duration-300 group-hover:scale-105"
               />
             </div>
-            <h3 className="text-[30px] leading-[24px] uppercase font-medium">
+            <h3 className="text-3xl leading-[24px] uppercase font-medium">
               {product.title}
             </h3>
           </div>

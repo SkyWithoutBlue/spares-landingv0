@@ -35,7 +35,7 @@ export const Partners = ({ className }: PartnersProps) => {
             <h2 className="text-[60px] font-roboto-condensed uppercase mb-[40px]">
               ПАРТНЕРЫ
             </h2>
-            <p className="text-[30px] leading-[140%] font-roboto-condensed uppercase">
+            <p className="text-3xl leading-[140%] font-roboto-condensed uppercase">
               МЫ ОСУЩЕСТВЛЯЕМ ПОСТАВКИ ВЕДУЩИМ МИРОВЫМ ПРОИЗВОДИТЕЛЯМ ШИН,
               ИХ ПОДРЯДЧИКАМ И ПРОИЗВОДСТВЕННЫМ КОМПАНИЯМ.
             </p>

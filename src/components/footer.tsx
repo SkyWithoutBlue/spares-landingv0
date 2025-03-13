@@ -20,8 +20,9 @@ export const Footer = ({ className }: FooterProps) => {
   };
 
   return (
-    <footer className={cn('w-full bg-white text-black border-t border-black', className)}>
-      <div className="max-w-[1920px] mx-auto px-6 md:px-12 py-8">
+    <footer className={cn('w-full bg-white text-black px-[50px]', className)}>
+        <div className="w-full h-[3px] bg-black"></div>
+      <div className="max-w-[1920px] mx-auto py-8">
         <div className="flex flex-col md:flex-row justify-between items-center md:items-start">
           <div className="mb-4 md:mb-0">
             <Link href="/" className="text-[32px] leading-none tracking-[0] uppercase font-medium">
