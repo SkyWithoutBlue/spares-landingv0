@@ -2,128 +2,86 @@
 
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { fadeInLeft, fadeInUp, staggerContainer, staggerItem } from '@/lib/constants/animations';
+import { fadeInUp } from '@/lib/constants/animations';
 
 interface ProductsProps {
   className?: string;
 }
 
-const categories = [
-  'ВСЕ',
-  'ШАРИКО-ВИНТОВЫЕ ПЕРЕДАЧИ',
-  'РОЛИКОВЫЕ ВИНТЫ',
-  'ПЕРЕДАЧИ'
-] as const;
-
-type Category = typeof categories[number];
-
-const products = [
+const productCategories = [
   {
-    id: 1,
-    title: 'РОЛИКОВЫЕ ВИНТЫ',
-    image: '/images/products/1.png',
-    category: 'РОЛИКОВЫЕ ВИНТЫ' as Category,
+    title: 'ПЛАСТИНА СКОЛЬЖЕНИЯ',
+    images: [
+      '/images/products/sliding-plate-1.jpg',
+      '/images/products/sliding-plate-2.jpg',
+      '/images/products/sliding-plate-3.jpg',
+    ]
   },
   {
-    id: 2,
-    title: 'ВИНТОВЫЕ ПЕРЕДАЧИ',
-    image: '/images/products/2.png',
-    category: 'ШАРИКО-ВИНТОВЫЕ ПЕРЕДАЧИ' as Category,
+    title: 'SPRINGS VENTS',
+    images: [
+      '/images/products/springs-1.jpg',
+      '/images/products/springs-2.jpg',
+      '/images/products/springs-3.jpg',
+    ]
   },
   {
-    id: 3,
-    title: 'ПЕРЕДАЧИ',
-    image: '/images/products/3.png',
-    category: 'ПЕРЕДАЧИ' as Category,
-  },
+    title: 'ДЕТАЛИ С РЕЗЬБОЙ',
+    images: [
+      '/images/products/threaded-1.jpg',
+      '/images/products/threaded-2.jpg',
+      '/images/products/threaded-3.jpg',
+    ]
+  }
 ];
 
-const productVariants = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: { opacity: 1, scale: 1 }
-};
-
 export const Products = ({ className }: ProductsProps) => {
-  const [activeCategory, setActiveCategory] = useState<Category>('ВСЕ');
-
-  const filteredProducts = activeCategory === 'ВСЕ'
-    ? products
-    : products.filter(product => product.category === activeCategory);
-
   return (
-    <section id="products" className={cn('w-full bg-white text-black px-6', className)}>
-      <motion.h2 {...fadeInLeft} className="text-[40px] md:text-[60px] leading-normal md:leading-[32px] uppercase font-bold mb-8 md:mb-12">
-        ПРОДУКЦИЯ
-      </motion.h2>
+    <section id="products" className={cn('w-full bg-white py-16', className)}>
+      <div className="max-w-[1920px] mx-auto px-6 md:px-12">
+        <motion.div
+          {...fadeInUp}
+          className="relative mb-16"
+        >
+          <div className="absolute inset-0 bg-[/images/label-bg.jpg] transform origin-left" />
+          <h2 className="relative text-[32px] md:text-[48px] font-bold text-white text-center py-4">
+            ПРОДУКТЫ
+          </h2>
+        </motion.div>
 
-      {/* Categories */}
-      <motion.div
-        variants={staggerContainer}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        className="flex flex-wrap gap-4 mt-[40px] mb-[50px]"
-      >
-        {categories.map((category) => (
-          <motion.button
-            key={category}
-            variants={staggerItem}
-            transition={{ duration: 0.5 }}
-            onClick={() => setActiveCategory(category)}
-            className={cn(
-              'text-3xl uppercase',
-              activeCategory === category
-                ? 'text-black font-bold'
-                : 'text-gray-500 hover:text-gray-700'
-            )}
-          >
-            {category}
-            {category !== 'ВСЕ' && ' |'}
-          </motion.button>
-        ))}
-      </motion.div>
-
-      {/* Description */}
-      <motion.p {...fadeInUp} className="text-3xl uppercase mb-[54px]">
-        ИЗГОТАВЛИВАЕМ ШИПЫ И МИНИВЕНТИЛИ ПО ЧЕРТЕЖАМ ЗАКАЗЧИКА. ВОЗМОЖНО ИЗГОТОВЛЕНИЕ
-        КАК ИЗ ОБЫЧНОЙ СТАЛИ, ТАК И ИЗ НЕРЖАВЕЮЩЕЙ СТАЛИ. ВОЗМОЖНО ТОЧЕНИЕ ВНУТРЕННЕЙ
-        И НАРУЖНОЙ РЕЗЬБЫ. ПОВЕРХНОСТНАЯ ОБРАБОТКА ПО ЗАПРОСУ.
-      </motion.p>
-
-      {/* Products Grid */}
-      <motion.div
-        variants={staggerContainer}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-      >
-        {filteredProducts.map((product) => (
-          <motion.div
-            key={product.id}
-            variants={productVariants}
-            transition={{ duration: 0.5 }}
-            className="group cursor-pointer"
-          >
-            <div className="relative aspect-square mb-4 overflow-hidden bg-gray-100">
-              <Image
-                src={product.image}
-                alt={product.title}
-                fill
-                className="object-cover transition-transform duration-300 group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                quality={85}
-                loading="lazy"
-              />
-            </div>
-            <h3 className="text-3xl leading-[24px] uppercase font-medium">
-              {product.title}
-            </h3>
-          </motion.div>
-        ))}
-      </motion.div>
+        <div className="space-y-16">
+          {productCategories.map((category, index) => (
+            <motion.div
+              key={category.title}
+              {...fadeInUp}
+              transition={{ delay: index * 0.2 }}
+              className="space-y-4"
+            >
+              <h3 className="text-[24px] md:text-[32px] font-bold text-center border border-black py-2">
+                {category.title}
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {category.images.map((image, imageIndex) => (
+                  <div
+                    key={imageIndex}
+                    className="aspect-square border border-gray-300 p-4 flex items-center justify-center"
+                  >
+                    <div className="relative w-full h-full">
+                      <Image
+                        src={image}
+                        alt={`${category.title} ${imageIndex + 1}`}
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
     </section>
   );
 };

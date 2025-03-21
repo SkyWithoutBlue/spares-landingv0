@@ -5,8 +5,9 @@ import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { BurgerMenu } from '@/components/ui/burger-menu';
 import Link from 'next/link';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { fadeInUp } from '@/lib/constants/animations';
+import { useCallback } from 'react';
 
 interface HeroProps {
   className?: string;
@@ -14,7 +15,19 @@ interface HeroProps {
 
 export const Hero = ({ className }: HeroProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const { scrollY } = useScroll();
+
+  const words = ["ЦЕНА", "КАЧЕСТВО", "СКОРОСТЬ"];
+
+  // Автоматическое переключение слов
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentWordIndex((prev) => (prev + 1) % words.length);
+    }, 3000); // Меняем слово каждые 3 секунды
+
+    return () => clearInterval(interval);
+  }, []);
 
   // Создаем эффект параллакса для фона
   const backgroundY = useTransform(scrollY, [0, 500], [0, 150]);
@@ -86,7 +99,7 @@ export const Hero = ({ className }: HeroProps) => {
             fill
             className="object-cover"
             priority
-            quality={85}
+            quality={100}
             sizes="100vw"
             placeholder="blur"
             blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSEkMjU1LS0yMi4qLjgyPjA+OjU1RUVHSkdKTEtMTjQ2UFdaSk9KR0v/2wBDAR4eHh0aHRgYHRpFOTQ5RUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUX/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
@@ -98,7 +111,7 @@ export const Hero = ({ className }: HeroProps) => {
         <div className="py-4">
           <div className="flex items-center justify-between">
             <Link href="/" className="text-[24px] sm:text-[28px] md:text-[32px] leading-none tracking-[0] uppercase font-medium">
-              Логотип
+                <Image src="/logo-white.svg" alt="logo" width={100} height={100} />
             </Link>
 
             <nav className="hidden lg:flex items-center gap-4 xl:gap-8">
@@ -258,21 +271,42 @@ export const Hero = ({ className }: HeroProps) => {
         </div>
 
         <div className="flex-grow flex flex-col justify-center">
-          <motion.h1
-            {...fadeInUp}
-            className="text-[40px] md:text-[60px] lg:text-[100px] font-roboto-condensed uppercase max-w-[1200px] leading-tight mb-8"
-          >
-            ДЕТАЛИ ДЛЯ РЕМОНТА АВТОМОБИЛЕЙ ОПТОМ
-          </motion.h1>
+          <div className="relative h-[60px] md:h-[80px] lg:h-[100px] mb-48">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentWordIndex}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+                className="absolute w-full text-6xl md:text-8xl lg:text-9xl font-roboto-condensed font-bold uppercase"
+              >
+                {words[currentWordIndex]}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
           <motion.a
             {...fadeInUp}
             transition={{ delay: 0.2 }}
             href="#products"
             onClick={(e) => scrollToSection(e, 'products')}
-            className="inline-flex px-[63px] py-[10px] border-[2px] border-white uppercase text-lg hover:bg-white hover:text-black transition-colors w-fit rounded-[4px] md:text-3xl lg:text-[40px]"
+            className="absolute bottom-20 inline-flex px-[63px] py-[10px] border-[2px] border-white uppercase text-lg hover:bg-white hover:text-black transition-colors w-fit rounded-[4px] md:text-3xl lg:text-[40px]"
           >
             Узнать больше
           </motion.a>
+        </div>
+
+        {/* Пагинация */}
+        <div className="absolute bottom-8 left-0 right-0 flex justify-center gap-2">
+          {words.map((_, index) => (
+            <div
+              key={index}
+              className={`w-2 h-2 rounded-full transition-colors duration-300 ${
+                index === currentWordIndex ? 'bg-white' : 'bg-white/50'
+              }`}
+            />
+          ))}
         </div>
       </div>
     </section>

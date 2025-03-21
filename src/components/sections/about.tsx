@@ -37,49 +37,27 @@ export const About = ({ className }: AboutProps) => {
   ];
 
   return (
-    <section id="about" className={cn('py-8 md:py-20 bg-white text-black px-4 md:px-[50px]', className)}>
-      <motion.h2 {...fadeInLeft} className="text-[40px] md:text-[60px] leading-normal md:leading-[32px] uppercase font-bold mb-8 md:mb-12">
+    <section id="about" className={cn('py-8 md:py-20 bg-white text-black px-4 gap-8 md:px-[50px] flex', className)}>
+      <motion.h2 {...fadeInLeft} className="text-[40px] md:text-[60px] uppercase text-nowrap whitespace-nowrap">
         О НАС
       </motion.h2>
-      <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-12 md:mb-20">
+      <div className="gap-8 md:gap-12 items-center mb-12 md:mb-20">
         <motion.div {...fadeInLeft} transition={{ duration: 0.6, delay: 0.2 }} className="space-y-6 md:space-y-10">
           <p className="text-[24px] md:text-[35px] leading-[120%] uppercase">
-            МЫ - ЛИДЕРЫ В СФЕРЕ ОПТОВОЙ ТОРГОВЛИ АВТОМОБИЛЬНЫМИ ЗАПЧАСТЯМИ ДЛЯ
-            РЕМОНТА И ОБСЛУЖИВАНИЯ АВТОМОБИЛЕЙ.
+          Компания <b>INNO LINK LLC</b> специализируется на производстве компонентов для различных отраслей промышленности, включая автомобильную, судостроительную и полупроводниковую, предоставляя высококачественные, надежные и быстрые решения.
           </p>
           <p className="text-[24px] md:text-[35px] leading-[120%] uppercase">
-            МЫ ПРЕДЛАГАЕМ ШИРОКИЙ АССОРТИМЕНТ ДЕТАЛЕЙ ДЛЯ ЛЕГКОВЫХ И КОММЕРЧЕСКИХ
-            АВТОМОБИЛЕЙ, ОБЕСПЕЧИВАЯ ВЫСОКОЕ КАЧЕСТВО И НАДЕЖНОСТЬ КАЖДОЙ
-            ПРОДУКЦИИ.
+          Мы предлагаем <b>собственное производство</b>, гарантируя качество и своевременную доставку. Учитываем все пожелания наших партнеров обеспечивая комфортное сопровождение от начала производства до доставки товара до склада парТнера.
+          </p>
+          <p className="text-[24px] md:text-[35px] leading-[120%] uppercase">
+          Благодаря современным технологиям, постоянным исследованиям и разработкам мы поддерживаем <b>передовые технологии в производстве</b> автомобильной отрасли,особенно большое внимание уделяем расширению производства шинных компонентов.
+          </p>
+          <p className="text-[24px] md:text-[35px] leading-[120%] uppercase">
+          Мы строим <b>стабильную и бесперебойную работу</b> с нашими партнерами по всему миру.Благодаря большому спросу рынок наших партнеров постоянно расширяется.
           </p>
         </motion.div>
-        <motion.div {...fadeInScale} className="relative h-[250px] md:h-[443px] w-full">
-          <Image
-            src="/images/world-map.png"
-            alt="Карта мира с маркерами"
-            fill
-            className="object-contain"
-            sizes="(max-width: 768px) 100vw, 50vw"
-            quality={85}
-            loading="lazy"
-          />
-        </motion.div>
       </div>
-      <motion.div
-        variants={staggerContainer}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 md:gap-4 text-xl md:text-3xl py-8 md:py-12 before:content-[''] before:absolute before:left-[-16px] md:before:left-[-50px] before:right-[-16px] md:before:right-[-50px] before:top-0 before:h-[3px] before:bg-black after:content-[''] after:absolute after:left-[-16px] md:after:left-[-50px] after:right-[-16px] md:after:right-[-50px] after:bottom-0 after:h-[3px] after:bg-black"
-      >
-        {statistics.map((stat, index) => (
-          <StatisticItem
-            key={index}
-            title={stat.title}
-            value={stat.value}
-          />
-        ))}
-      </motion.div>
+
     </section>
   );
 };

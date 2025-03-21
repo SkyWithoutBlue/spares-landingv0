@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-
+import Image from 'next/image';
 interface FooterProps {
   className?: string;
 }
@@ -26,7 +26,7 @@ export const Footer = ({ className }: FooterProps) => {
         <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-8 md:gap-0">
           <div className="text-center md:text-left">
             <Link href="/" className="text-[28px] md:text-[32px] leading-none tracking-[0] uppercase font-medium">
-              Логотип
+                <Image src="/logo-black.svg" alt="logo" width={100} height={100} />
             </Link>
             <p className="mt-3 md:mt-4 text-sm md:text-base">ALL RIGHT RESERVED, 2025</p>
           </div>
