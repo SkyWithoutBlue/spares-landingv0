@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
-import { fadeInLeft, fadeInScale, staggerContainer, staggerItem } from '@/lib/constants/animations';
+import { fadeInLeft, staggerItem } from '@/lib/constants/animations';
 
 interface AboutProps {
   className?: string;

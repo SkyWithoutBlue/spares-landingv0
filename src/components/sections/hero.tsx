@@ -19,7 +19,6 @@ export const Hero = ({ className }: HeroProps) => {
 
   const words = ["ЦЕНА", "КАЧЕСТВО", "СКОРОСТЬ"];
 
-  // Оптимизированное переключение слов с использованием useCallback
   const switchWord = useCallback(() => {
     setCurrentWordIndex((prev) => (prev + 1) % words.length);
   }, [words.length]);
@@ -29,11 +28,9 @@ export const Hero = ({ className }: HeroProps) => {
     return () => clearInterval(interval);
   }, [switchWord]);
 
-  // Оптимизированный эффект параллакса
   const backgroundY = useTransform(scrollY, [0, 500], [0, 150]);
   const opacity = useTransform(scrollY, [0, 500], [0.5, 0.2]);
 
-  // Оптимизированная функция прокрутки
   const scrollToSection = useCallback((e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
     e.preventDefault();
     const section = document.getElementById(sectionId);
@@ -47,7 +44,6 @@ export const Hero = ({ className }: HeroProps) => {
     }
   }, []);
 
-  // Управление overflow при открытии меню
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? 'hidden' : 'unset';
     return () => {
