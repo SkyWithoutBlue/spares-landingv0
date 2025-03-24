@@ -45,28 +45,28 @@ export const Footer = ({ className }: FooterProps) => {
               <a
                 href="#about"
                 onClick={(e) => scrollToSection(e, 'about')}
-                className="text-[18px] sm:text-[20px] md:text-[24px] leading-none tracking-[0] uppercase font-medium hover:text-[#014B9F] transition-colors duration-200 text-center whitespace-nowrap"
+                className="text-[18px] sm:text-[20px] md:text-[32px] leading-none tracking-[0] uppercase font-medium hover:text-[#014B9F] transition-colors duration-200 text-center whitespace-nowrap"
               >
                 О нас
               </a>
               <a
                 href="#products"
                 onClick={(e) => scrollToSection(e, 'products')}
-                className="text-[18px] sm:text-[20px] md:text-[24px] leading-none tracking-[0] uppercase font-medium hover:text-[#014B9F] transition-colors duration-200 text-center whitespace-nowrap"
+                className="text-[18px] sm:text-[20px] md:text-[32px] leading-none tracking-[0] uppercase font-medium hover:text-[#014B9F] transition-colors duration-200 text-center whitespace-nowrap"
               >
                 Продукция
               </a>
               <a
                 href="#partners"
                 onClick={(e) => scrollToSection(e, 'partners')}
-                className="text-[18px] sm:text-[20px] md:text-[24px] leading-none tracking-[0] uppercase font-medium hover:text-[#014B9F] transition-colors duration-200 text-center whitespace-nowrap"
+                className="text-[18px] sm:text-[20px] md:text-[32px] leading-none tracking-[0] uppercase font-medium hover:text-[#014B9F] transition-colors duration-200 text-center whitespace-nowrap"
               >
                 Партнеры
               </a>
               <a
                 href="#contacts"
                 onClick={(e) => scrollToSection(e, 'contacts')}
-                className="text-[18px] sm:text-[20px] md:text-[24px] leading-none tracking-[0] uppercase font-medium hover:text-[#014B9F] transition-colors duration-200 text-center whitespace-nowrap"
+                className="text-[18px] sm:text-[20px] md:text-[32px] leading-none tracking-[0] uppercase font-medium hover:text-[#014B9F] transition-colors duration-200 text-center whitespace-nowrap"
               >
                 Контакты
               </a>
