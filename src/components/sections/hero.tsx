@@ -79,8 +79,8 @@ export const Hero = ({ className }: HeroProps) => {
               <Image
                 src="/logo-white.svg"
                 alt="logo"
-                width={100}
-                height={100}
+                width={200}
+                height={150}
                 priority
               />
             </Link>
