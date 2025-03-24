@@ -4,6 +4,10 @@ import { ContactForm } from '@/components/sections/contact-form';
 import { CountriesPartners } from '@/components/sections/countries-partners';
 import { Research } from '@/components/sections/research';
 import { Products } from '@/components/sections/products';
+import { Partners } from '@/components/sections/partners';
+import { Contacts } from '@/components/sections/contacts';
+import { Footer } from '@/components/sections/footer';
+
 export default function Home() {
   return (
     <main>
@@ -13,6 +17,9 @@ export default function Home() {
       <Research />
       <Products/>
       <ContactForm />
+      <Partners />
+      <Contacts />
+      <Footer />
     </main>
   );
 }
