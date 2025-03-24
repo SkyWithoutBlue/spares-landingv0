@@ -17,7 +17,7 @@ export const Hero = ({ className }: HeroProps) => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const { scrollY } = useScroll();
 
-  const words = ["ЦЕНА", "КАЧЕСТВО", "СКОРОСТЬ"];
+  const words = ["КАЧЕСТВО", "ЦЕНА"];
 
   const switchWord = useCallback(() => {
     setCurrentWordIndex((prev) => (prev + 1) % words.length);
