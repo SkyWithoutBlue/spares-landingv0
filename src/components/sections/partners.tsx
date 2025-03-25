@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import { fadeInLeft } from '@/lib/constants/animations';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface PartnersProps {
   className?: string;
@@ -24,60 +25,79 @@ const partners = [
   { id: 12, name: 'Michelin', logo: '/images/partners/MICHELIN.png' },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5
+    }
+  }
+};
+
 export const Partners = ({ className }: PartnersProps) => {
   return (
-    <section id="partners" className={cn('w-full bg-white', className)}>
-      <motion.h2
-        {...fadeInLeft}
-        className="text-[32px] md:text-[80px] font-bold mb-16 bg-[url('/images/label-bg.png')] text-center bg-cover bg-no-repeat text-white h-[270px] flex items-center justify-center uppercase"
-      >
-        ПАРТНЕРЫ
-      </motion.h2>
-
-      <div className="max-w-[1920px] mx-auto px-6 md:px-12 pb-16">
-        <div className="flex flex-col space-y-12">
-          <div className="flex flex-col md:flex-row md:gap-32 justify-start space-y-4 md:space-y-0">
-            <motion.h3
+    <section id="partners" className={cn('w-full relative overflow-hidden bg-gradient-to-b from-[#014B9F] to-[#003366]', className)}>
+      <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
+      <div className="absolute top-0 left-0 right-0 h-[150px] bg-white transform -skew-y-3 -translate-y-1/2" />
+      <div className="absolute bottom-0 left-0 right-0 h-[150px] bg-white transform -skew-y-3 translate-y-1/2" />
+      <div className="relative max-w-[1920px] mx-auto px-4 sm:px-6 md:px-12 py-32 text-white">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={containerVariants}
+          className="flex flex-col items-center gap-12 p-4 sm:p-6 md:p-8 lg:p-12"
+        >
+          <motion.div variants={itemVariants} className="text-center max-w-3xl">
+            <motion.h2
               {...fadeInLeft}
-              className="text-[24px] md:text-[60px] font-bold text-black"
+              className="text-[32px] md:text-[48px] lg:text-[60px] font-bold mb-6"
             >
-              ПАРТНЕРЫ
-            </motion.h3>
-            <motion.p
-              {...fadeInLeft}
-              transition={{ delay: 0.2 }}
-              className="text-[16px] md:text-[30px]  text-black font-[var(--font-roboto)]"
-            >
-              МЫ ОСУЩЕСТВЛЯЕМ ПОСТАВКИ ВЕДУЩИМ МИРОВЫМ ПРОИЗВОДИТЕЛЯМ ШИН, ИХ ПОДРЯДЧИКАМ И ПРОИЗВОДСТВЕННЫМ КОМПАНИЯМ.
-            </motion.p>
-          </div>
+              Наши партнеры
+            </motion.h2>
+            <p className="text-lg text-gray-200">
+              Мы осуществляем поставки ведущим мировым производителям шин, их подрядчикам и производственным компаниям
+            </p>
+          </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, staggerChildren: 0.1 }}
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-12"
+            variants={containerVariants}
+            className="w-full max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8"
           >
             {partners.map((partner) => (
               <motion.div
                 key={partner.id}
+                variants={itemVariants}
                 whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                className="flex items-center justify-center p-4 rounded-lg bg-white hover:shadow-lg pointer-events-auto "
+                className="group relative bg-white/5 backdrop-blur-sm rounded-lg p-6 hover:bg-white/10 transition-all duration-300"
               >
-                <Image
-                  src={partner.logo}
-                  alt={partner.name}
-                  width={250}
-                  height={80}
-                  className="object-contain group-hover:brightness-75 transition-all"
-                  loading={partner.id <= 4 ? 'eager' : 'lazy'}
-                />
+                <div className="relative aspect-[2/1] w-full">
+                  <Image
+                    src={partner.logo}
+                    alt={partner.name}
+                    fill
+                    className="object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-end p-4">
+                  <span className="text-white text-base font-medium">{partner.name}</span>
+                </div>
               </motion.div>
             ))}
           </motion.div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

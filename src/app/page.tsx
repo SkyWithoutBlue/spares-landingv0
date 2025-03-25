@@ -16,7 +16,6 @@ export default function Home() {
       <CountriesPartners />
       <Research />
       <Products/>
-      <ContactForm />
       <Partners />
       <Contacts />
       <Footer />

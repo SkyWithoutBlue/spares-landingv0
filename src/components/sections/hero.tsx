@@ -29,7 +29,7 @@ export const Hero = ({ className }: HeroProps) => {
   }, [switchWord]);
 
   const backgroundY = useTransform(scrollY, [0, 500], [0, 150]);
-  const opacity = useTransform(scrollY, [0, 500], [0.5, 0.2]);
+  const opacity = useTransform(scrollY, [0, 500], [1, 0.8]);
 
   const scrollToSection = useCallback((e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
     e.preventDefault();
@@ -60,7 +60,7 @@ export const Hero = ({ className }: HeroProps) => {
           willChange: 'transform'
         }}
       >
-        <motion.div style={{ opacity }}>
+        <motion.div style={{ opacity }} className="relative h-full">
           <Image
             src="/images/hero-bg.jpg"
             alt="Hero Background"
@@ -69,6 +69,7 @@ export const Hero = ({ className }: HeroProps) => {
             className="object-cover"
             quality={90}
           />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/30" />
         </motion.div>
       </motion.div>
 
@@ -106,8 +107,8 @@ export const Hero = ({ className }: HeroProps) => {
               <motion.a
                 href="#contact-form"
                 onClick={(e) => scrollToSection(e, 'contact-form')}
-                className="text-[20px] xl:text-[32px] leading-none tracking-[0] uppercase font-medium px-4 xl:px-6 py-2 border-2 border-white rounded-[4px] hover:bg-white hover:text-black transition-all duration-300]"
-                whileHover={{ scale: 1 }}
+                className="text-[20px] xl:text-[32px] leading-none tracking-[0] uppercase font-medium px-4 xl:px-6 py-2 border-2 border-white rounded-[4px] hover:bg-white hover:text-black transition-all duration-300"
+                whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
                 Связаться
@@ -130,7 +131,7 @@ export const Hero = ({ className }: HeroProps) => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: '100%' }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="fixed inset-0 bg-black bg-opacity-90 z-40 lg:hidden"
+              className="fixed inset-0 bg-black/90 backdrop-blur-sm z-40 lg:hidden"
             >
               <nav className="h-full flex flex-col items-center justify-center">
                 <motion.div
@@ -187,7 +188,7 @@ export const Hero = ({ className }: HeroProps) => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.5 }}
-                className="absolute w-full text-6xl md:text-8xl lg:text-9xl font-roboto-condensed font-bold uppercase"
+                className="absolute w-full text-6xl md:text-8xl lg:text-9xl font-roboto-condensed font-bold uppercase text-white drop-shadow-lg"
               >
                 {words[currentWordIndex]}
               </motion.div>
@@ -199,7 +200,7 @@ export const Hero = ({ className }: HeroProps) => {
             transition={{ delay: 0.2 }}
             href="#products"
             onClick={(e) => scrollToSection(e, 'products')}
-            className="absolute bottom-20 inline-flex px-[63px] py-[10px] border-[2px] border-white uppercase text-lg hover:bg-white hover:text-black transition-colors w-fit rounded-[4px] md:text-3xl lg:text-[40px]"
+            className="absolute bottom-20 inline-flex px-[63px] py-[10px] border-[2px] border-white uppercase text-lg hover:bg-white hover:text-black transition-all duration-300 w-fit rounded-[4px] md:text-3xl lg:text-[40px] backdrop-blur-sm hover:backdrop-blur-none"
           >
             Узнать больше
           </motion.a>
