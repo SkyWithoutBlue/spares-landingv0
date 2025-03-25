@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { fadeInLeft } from '@/lib/constants/animations';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { MapPin, Mail, Phone, Send, MessageCircle, Globe } from 'lucide-react';
+import { MapPin, Mail, Phone, Send, Globe } from 'lucide-react';
 
 interface ContactsProps {
   className?: string;

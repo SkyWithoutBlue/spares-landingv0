@@ -4,7 +4,6 @@ import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import { fadeInLeft } from '@/lib/constants/animations';
 import Image from 'next/image';
-import Link from 'next/link';
 
 interface PartnersProps {
   className?: string;

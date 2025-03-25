@@ -3,7 +3,7 @@
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import { fadeInLeft } from '@/lib/constants/animations';
-import { Building2, Globe2, Users, Target, Award, Clock, Shield, Zap, Factory, Ship, Car, Microchip } from 'lucide-react';
+import { Target, Clock, Shield, Zap, Factory, Ship, Car, Microchip } from 'lucide-react';
 
 interface AboutProps {
   className?: string;
