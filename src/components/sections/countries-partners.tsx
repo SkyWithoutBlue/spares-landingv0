@@ -11,8 +11,8 @@ interface CountriesPartnersProps {
 
 export const CountriesPartners = ({ className }: CountriesPartnersProps) => {
   return (
-    <section id="countries-partners" className={cn('w-full bg-white text-black py-16', className)}>
-      <div className="max-w-[1920px] mx-auto px-6 md:px-12">
+    <section id="countries-partners" className={cn('w-full bg-white text-black', className)}>
+      <div className="max-w-[1920px] mx-auto px-6 md:px-12 md:h-screen flex flex-col justify-center">
         <motion.h2
           {...fadeInLeft}
           className="text-[32px] md:text-[80px] font-bold mb-16 uppercase"

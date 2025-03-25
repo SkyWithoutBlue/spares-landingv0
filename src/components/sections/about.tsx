@@ -10,8 +10,8 @@ interface AboutProps {
 
 export const About = ({ className }: AboutProps) => {
   return (
-    <section id="about" className={cn('w-full bg-white text-black', className)}>
-      <div className="max-w-[1920px] mx-auto px-6 md:px-12 py-16">
+    <section id="about" className={cn('w-full mt-12 bg-white text-black flex flex-col justify-center', className)}>
+      <div className="max-w-[1920px] mx-auto px-6 md:px-12">
         <div className="flex flex-col md:flex-row gap-8 md:gap-16 mb-16">
           <motion.h2
             {...fadeInLeft}
@@ -19,7 +19,7 @@ export const About = ({ className }: AboutProps) => {
           >
             О НАС
           </motion.h2>
-          <div className="space-y-8">
+          <div className="space-y-16">
             <motion.p
               {...fadeInLeft}
               transition={{ delay: 0.2 }}
