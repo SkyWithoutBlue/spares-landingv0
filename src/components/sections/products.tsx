@@ -19,7 +19,7 @@ const productCategories = [
     ]
   },
   {
-    title: 'SPRINGS VENTS',
+    title: 'SPRING VENTS',
     images: [
       { src: '/images/products/springs-1.jpg', alt: 'Springs Vents 1' },
       { src: '/images/products/springs-2.jpg', alt: 'Springs Vents 2' },

@@ -18,7 +18,7 @@ const partners = [
   { id: 6, name: 'Himile', logo: '/images/partners/Himile.png' },
   { id: 7, name: 'Nokian Tyres', logo: '/images/partners/Nokian_Tyres.png' },
   { id: 8, name: 'Pirelli', logo: '/images/partners/PIRELLI.png' },
-  { id: 9, name: 'SKF', logo: '/images/partners/SKF.png' },
+  { id: 9, name: 'SKF', logo: '/images/partners/skf_logo.png' },
   { id: 10, name: 'IMI', logo: '/images/partners/IMI.png' },
   { id: 11, name: 'Honda', logo: '/images/partners/Honda.png' },
   { id: 12, name: 'Michelin', logo: '/images/partners/MICHELIN.png' },
