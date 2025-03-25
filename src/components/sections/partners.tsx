@@ -74,14 +74,14 @@ export const Partners = ({ className }: PartnersProps) => {
 
           <motion.div
             variants={containerVariants}
-            className="w-full max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8"
+            className="w-full max-w-[1920px] mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 md:gap-10"
           >
             {partners.map((partner) => (
               <motion.div
                 key={partner.id}
                 variants={itemVariants}
                 whileHover={{ scale: 1.05 }}
-                className="group relative bg-white/5 backdrop-blur-sm rounded-lg p-6 hover:bg-white/10 transition-all duration-300"
+                className="group relative bg-white/5 backdrop-blur-sm rounded-xl p-8 hover:bg-white/10 transition-all duration-300"
               >
                 <div className="relative aspect-[2/1] w-full">
                   <Image
@@ -89,10 +89,11 @@ export const Partners = ({ className }: PartnersProps) => {
                     alt={partner.name}
                     fill
                     className="object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"
+                    sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 16vw"
                   />
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-end p-4">
-                  <span className="text-white text-base font-medium">{partner.name}</span>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl flex items-end p-6">
+                  <span className="text-white text-lg font-medium">{partner.name}</span>
                 </div>
               </motion.div>
             ))}

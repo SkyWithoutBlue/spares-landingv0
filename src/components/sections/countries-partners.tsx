@@ -15,7 +15,7 @@ export const CountriesPartners = ({ className }: CountriesPartnersProps) => {
       <div className="max-w-[1920px] mx-auto px-6 md:px-12 md:h-screen flex flex-col justify-center">
         <motion.h2
           {...fadeInLeft}
-          className="text-[32px] md:text-[80px] font-bold mb-16 uppercase"
+          className="text-[32px] md:text-[48px] lg:text-[60px] font-bold text-black"
         >
           СТРАНЫ-ПАРТНЕРЫ
         </motion.h2>
@@ -23,15 +23,17 @@ export const CountriesPartners = ({ className }: CountriesPartnersProps) => {
         <motion.div
           {...fadeInUp}
           transition={{ delay: 0.2 }}
-          className="relative aspect-[16/9] w-full rounded-lg overflow-hidden"
+          className="relative w-full rounded-lg overflow-hidden"
         >
           <Image
             src="/images/partners/countries-partners.jpg"
             alt="Карта стран-партнеров"
-            fill
+            width={1920}
+            height={1080}
+            quality={100}
             priority
-            className="object-cover transition-transform duration-700"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1920px"
+            className="w-full h-auto"
+            sizes="100vw"
           />
         </motion.div>
       </div>

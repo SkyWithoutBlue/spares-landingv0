@@ -4,8 +4,8 @@ import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import { fadeInLeft } from '@/lib/constants/animations';
 import Link from 'next/link';
-import { useState } from 'react';
-import { MapPin, Mail, Phone, Send, MessageCircle } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { MapPin, Mail, Phone, Send, MessageCircle, Globe } from 'lucide-react';
 
 interface ContactsProps {
   className?: string;
@@ -32,16 +32,123 @@ const itemVariants = {
   }
 };
 
+const TELEGRAM_BOT_TOKEN = '8081103752:AAEsowXrEw39bM2uwOPr25OoWmBXnm1WX7M';
+const TELEGRAM_CHAT_ID = '492759728';
+const COOLDOWN_TIME = 60; // Время ожидания между отправками в секундах
+const MIN_MESSAGE_LENGTH = 10;
+const MAX_MESSAGE_LENGTH = 1000;
+
 export const Contacts = ({ className }: ContactsProps) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [cooldown, setCooldown] = useState(0);
+  const [errors, setErrors] = useState<{
+    name?: string;
+    email?: string;
+    message?: string;
+  }>({});
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (cooldown > 0) {
+      timer = setInterval(() => {
+        setCooldown(prev => prev - 1);
+      }, 1000);
+    }
+    return () => clearInterval(timer);
+  }, [cooldown]);
+
+  const validateForm = () => {
+    const newErrors: typeof errors = {};
+
+    if (!formData.name.trim()) {
+      newErrors.name = 'Введите ваше имя';
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = 'Введите email';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Введите корректный email';
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = 'Введите сообщение';
+    } else if (formData.message.length < MIN_MESSAGE_LENGTH) {
+      newErrors.message = `Сообщение должно содержать минимум ${MIN_MESSAGE_LENGTH} символов`;
+    } else if (formData.message.length > MAX_MESSAGE_LENGTH) {
+      newErrors.message = `Сообщение не должно превышать ${MAX_MESSAGE_LENGTH} символов`;
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const sendToTelegram = async (data: typeof formData) => {
+    const message = `
+Новое сообщение с сайта:
+Имя: ${data.name}
+Email: ${data.email}
+Сообщение: ${data.message}
+    `;
+
+    try {
+      const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          chat_id: TELEGRAM_CHAT_ID,
+          text: message,
+          parse_mode: 'HTML',
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
+
+      return true;
+    } catch (error) {
+      console.error('Error sending message:', error);
+      return false;
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData);
+
+    if (cooldown > 0) {
+      setSubmitStatus('error');
+      return;
+    }
+
+    if (!validateForm()) {
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      const success = await sendToTelegram(formData);
+      if (success) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+        setCooldown(COOLDOWN_TIME);
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -73,7 +180,8 @@ export const Contacts = ({ className }: ContactsProps) => {
                 <h3 className="text-xl font-semibold mb-4">Представительство в России:</h3>
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
-
+                    <MapPin className="w-5 h-5" />
+                    <span>Москва</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <Mail className="w-5 h-5" />
@@ -85,6 +193,12 @@ export const Contacts = ({ className }: ContactsProps) => {
                     <Phone className="w-5 h-5" />
                     <Link href="tel:+79144832989" className="hover:underline">
                       +7 914 483 29 89
+                    </Link>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Globe className="w-5 h-5" />
+                    <Link href="https://www.inno-link.ru" target="_blank" rel="noopener noreferrer" className="hover:underline">
+                      www.inno-link.ru
                     </Link>
                   </div>
                 </div>
@@ -147,9 +261,15 @@ export const Contacts = ({ className }: ContactsProps) => {
                     type="text"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-white/20"
+                    className={cn(
+                      "w-full bg-white/5 border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-white/20",
+                      errors.name ? "border-red-400" : "border-white/10"
+                    )}
                     required
                   />
+                  {errors.name && (
+                    <p className="text-red-400 text-sm mt-1">{errors.name}</p>
+                  )}
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-2">Email</label>
@@ -157,26 +277,64 @@ export const Contacts = ({ className }: ContactsProps) => {
                     type="email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-white/20"
+                    className={cn(
+                      "w-full bg-white/5 border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-white/20",
+                      errors.email ? "border-red-400" : "border-white/10"
+                    )}
                     required
                   />
+                  {errors.email && (
+                    <p className="text-red-400 text-sm mt-1">{errors.email}</p>
+                  )}
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-2">Сообщение</label>
                   <textarea
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 h-32 focus:outline-none focus:ring-2 focus:ring-white/20"
+                    className={cn(
+                      "w-full bg-white/5 border rounded-lg px-4 py-3 h-32 focus:outline-none focus:ring-2 focus:ring-white/20",
+                      errors.message ? "border-red-400" : "border-white/10"
+                    )}
                     required
                   />
+                  {errors.message && (
+                    <p className="text-red-400 text-sm mt-1">{errors.message}</p>
+                  )}
                 </div>
                 <button
                   type="submit"
-                  className="w-full bg-white text-[#014B9F] py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors flex items-center justify-center gap-2"
+                  disabled={isSubmitting || cooldown > 0}
+                  className={cn(
+                    "w-full py-3 rounded-lg font-medium transition-colors flex items-center justify-center gap-2",
+                    (isSubmitting || cooldown > 0)
+                      ? "bg-white/50 cursor-not-allowed"
+                      : "bg-white text-[#014B9F] hover:bg-gray-100"
+                  )}
                 >
-                  <Send className="w-5 h-5" />
-                  Отправить
+                  {isSubmitting ? (
+                    <>
+                      <div className="w-5 h-5 border-2 border-[#014B9F] border-t-transparent rounded-full animate-spin" />
+                      Отправка...
+                    </>
+                  ) : cooldown > 0 ? (
+                    <>
+                      <div className="w-5 h-5 border-2 border-[#014B9F] border-t-transparent rounded-full animate-spin" />
+                      Подождите {cooldown} сек...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5" />
+                      Отправить
+                    </>
+                  )}
                 </button>
+                {submitStatus === 'success' && (
+                  <p className="text-green-400 text-center">Сообщение успешно отправлено!</p>
+                )}
+                {submitStatus === 'error' && cooldown === 0 && (
+                  <p className="text-red-400 text-center">Произошла ошибка при отправке. Попробуйте позже.</p>
+                )}
               </form>
             </div>
           </motion.div>

@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { fadeInUp } from '@/lib/constants/animations';
 
 interface FooterProps {
   className?: string;
@@ -21,11 +23,15 @@ export const Footer = ({ className }: FooterProps) => {
   };
 
   return (
-    <footer className={cn('w-full bg-white text-black relative', className)}>
-      <div className="max-w-[1920px] mx-auto px-4 sm:px-6 md:px-12">
-        <div className="border-t-3 border-black py-6 sm:py-8 md:py-12">
-          <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-8">
-            <div className="text-center md:text-left">
+    <footer className={cn('w-full text-black bg-white relative overflow-hidden', className)}>
+      <div className="absolute inset-0 bg-[url('/images/grid.svg')] opacity-10" />
+      <div className="relative max-w-[1920px] mx-auto px-4 sm:px-6 md:px-12">
+        <div className="py-12 sm:py-16 md:py-20">
+          <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-12">
+            <motion.div
+              {...fadeInUp}
+              className="text-center md:text-left space-y-6"
+            >
               <Link href="/" className="inline-block">
                 <Image
                   src="/logo-black.svg"
@@ -36,41 +42,50 @@ export const Footer = ({ className }: FooterProps) => {
                   priority
                 />
               </Link>
-              <p className="mt-2 sm:mt-3 text-[14px] sm:text-[15px] md:text-[16px] text-gray-600">
-                ALL RIGHT RESERVED, 2025
-              </p>
-            </div>
+              <div className="space-y-2">
+                <p className="text-[14px] sm:text-[15px] md:text-[16px] text-black">
+                  © 2025 INNO-LINK-LLC. Все права защищены
+                </p>
+                <p className="text-[14px] sm:text-[15px] md:text-[16px] text-black/60">
+                  Разработка и производство автокомпонентов
+                </p>
+              </div>
+            </motion.div>
 
-            <nav className="grid grid-cols-2 sm:flex sm:flex-row items-center justify-center gap-x-6 gap-y-4 sm:gap-8 md:gap-12">
+            <motion.nav
+              {...fadeInUp}
+              transition={{ delay: 0.1 }}
+              className="grid grid-cols-2 sm:flex sm:flex-row items-center justify-center gap-x-8 gap-y-6 sm:gap-10 md:gap-16"
+            >
               <a
                 href="#about"
                 onClick={(e) => scrollToSection(e, 'about')}
-                className="text-[18px] sm:text-[20px] md:text-[32px] leading-none tracking-[0] uppercase font-medium hover:text-[#014B9F] transition-colors duration-200 text-center whitespace-nowrap"
+                className="text-[16px] sm:text-[18px] md:text-[20px] leading-none tracking-[0] uppercase font-medium hover:text-black/80 transition-colors duration-200 text-center whitespace-nowrap"
               >
                 О нас
               </a>
               <a
                 href="#products"
                 onClick={(e) => scrollToSection(e, 'products')}
-                className="text-[18px] sm:text-[20px] md:text-[32px] leading-none tracking-[0] uppercase font-medium hover:text-[#014B9F] transition-colors duration-200 text-center whitespace-nowrap"
+                className="text-[16px] sm:text-[18px] md:text-[20px] leading-none tracking-[0] uppercase font-medium hover:text-black/80 transition-colors duration-200 text-center whitespace-nowrap"
               >
                 Продукция
               </a>
               <a
                 href="#partners"
                 onClick={(e) => scrollToSection(e, 'partners')}
-                className="text-[18px] sm:text-[20px] md:text-[32px] leading-none tracking-[0] uppercase font-medium hover:text-[#014B9F] transition-colors duration-200 text-center whitespace-nowrap"
+                className="text-[16px] sm:text-[18px] md:text-[20px] leading-none tracking-[0] uppercase font-medium hover:text-black/80 transition-colors duration-200 text-center whitespace-nowrap"
               >
                 Партнеры
               </a>
               <a
                 href="#contacts"
                 onClick={(e) => scrollToSection(e, 'contacts')}
-                className="text-[18px] sm:text-[20px] md:text-[32px] leading-none tracking-[0] uppercase font-medium hover:text-[#014B9F] transition-colors duration-200 text-center whitespace-nowrap"
+                className="text-[16px] sm:text-[18px] md:text-[20px] leading-none tracking-[0] uppercase font-medium hover:text-black/80 transition-colors duration-200 text-center whitespace-nowrap"
               >
                 Контакты
               </a>
-            </nav>
+            </motion.nav>
           </div>
         </div>
       </div>
