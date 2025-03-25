@@ -32,8 +32,8 @@ export const Contacts = ({ className }: ContactsProps) => {
                 <div className="space-y-3">
                   <p className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-2 text-[16px] sm:text-[18px] md:text-[20px]">
                     <span className="min-w-[80px] md:min-w-[100px]">E-MAIL:</span>
-                    <Link href="mailto:0710INNOLINK@GMAIL.COM" className="hover:underline break-all md:break-normal">
-                      0710INNOLINK@GMAIL.COM
+                    <Link href="mailto:0710innolink@gmail.com" className="hover:underline break-all md:break-normal">
+                    0710innolink@gmail.com
                     </Link>
                   </p>
                   <p className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-2 text-[16px] sm:text-[18px] md:text-[20px]">
@@ -79,8 +79,8 @@ export const Contacts = ({ className }: ContactsProps) => {
               <div className="space-y-3">
                 <p className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-2 text-[16px] sm:text-[18px] md:text-[20px]">
                   <span className="min-w-[80px] md:min-w-[100px]">E-MAIL:</span>
-                  <Link href="mailto:DK0122INNOLINK@GMAIL.COM" className="hover:underline break-all md:break-normal">
-                    DK0122INNOLINK@GMAIL.COM
+                  <Link href="mailto:dk0122innolink@gmail.com" className="hover:underline break-all md:break-normal">
+                  dk0122innolink@gmail.com
                   </Link>
                 </p>
                 <p className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-2 text-[16px] sm:text-[18px] md:text-[20px]">
@@ -90,8 +90,8 @@ export const Contacts = ({ className }: ContactsProps) => {
                   </Link>
                 </p>
                 <p className="text-[16px] sm:text-[18px] md:text-[20px]">
-                  4008 JINTIAN ROAD FUTIAN DISTRICT,<br />
-                  SHENZHEN,GUANGDONG.
+                4008 Jintian Road Futian District, <br />
+                Shenzhen,GuangDong.
                 </p>
               </div>
             </div>
