@@ -114,8 +114,7 @@ Email: ${data.email}
       }
 
       return true;
-    } catch (error) {
-      console.error('Error sending message:', error);
+    } catch {
       return false;
     }
   };
@@ -144,7 +143,7 @@ Email: ${data.email}
       } else {
         setSubmitStatus('error');
       }
-    } catch (error) {
+    } catch {
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
