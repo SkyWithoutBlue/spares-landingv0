@@ -33,7 +33,7 @@ const itemVariants = {
 };
 
 const TELEGRAM_BOT_TOKEN = '8081103752:AAEsowXrEw39bM2uwOPr25OoWmBXnm1WX7M';
-const TELEGRAM_CHAT_ID = '4500514253';
+const TELEGRAM_CHAT_ID = '-4500514253';
 const COOLDOWN_TIME = 60; // Время ожидания между отправками в секундах
 const MIN_MESSAGE_LENGTH = 10;
 const MAX_MESSAGE_LENGTH = 1000;
