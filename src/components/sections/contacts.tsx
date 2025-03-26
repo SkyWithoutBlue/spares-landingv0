@@ -208,7 +208,7 @@ Email: ${data.email}
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
                     <MapPin className="w-5 h-5" />
-                    <span>Шэньчжэнь</span>
+                    <span>4008 Jintian Road Futian District, Shenzhen,GuangDong.</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <Mail className="w-5 h-5" />
