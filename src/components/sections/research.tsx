@@ -46,7 +46,7 @@ export const Research = ({ className }: ResearchProps) => {
             </p>
           </motion.div>
 
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16 w-full">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16 w-[80%]">
             <div className="space-y-8 max-w-3xl">
               <motion.div
                 {...fadeInLeft}
@@ -100,17 +100,33 @@ export const Research = ({ className }: ResearchProps) => {
             >
               <div
                 className={cn(
-                  "relative aspect-[9/16] rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 cursor-pointer",
+                  "relative aspect-[9/16] rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 cursor-pointer group",
                   isVideoPlaying ? "scale-[1.02]" : "scale-100"
                 )}
                 onClick={handleVideoClick}
               >
+                {!isVideoPlaying && (
+                  <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-gradient-to-t from-black/80 via-black/40 to-transparent">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
+                      <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white/90 flex items-center justify-center">
+                        <svg
+                          className="w-6 h-6 sm:w-8 sm:h-8 text-[#014B9F] transform translate-x-0.5"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </div>
+                    </div>
+                    <span className="mt-4 text-white/90 text-sm sm:text-base font-medium">Смотреть видео</span>
+                  </div>
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10" />
                 <video
                   ref={videoRef}
                   className="w-full h-full object-cover"
                   preload="metadata"
-                  poster="/images/square-play.svg"
+                  poster="/images/research-poster.jpg"
                 >
                   <source src="images/products/VIDEO PRODUCT.mp4" type="video/mp4" />
                   Ваш браузер не поддерживает видео.
